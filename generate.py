@@ -6,6 +6,7 @@ dotenv.load_dotenv()
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.gemini import Gemini
+from llama_index.llms.ollama import Ollama
 import tiktoken
 import json
 
@@ -14,16 +15,18 @@ searcher = GmailSearcher()
 
 # if using openAI, this specifies which model to use
 # and it will use the same model for counting tokens.
-# If using Gemini, it will count as if for an openAI model because I'm lazy
+# If using non-OpenAI model, it will count as if for an openAI model because I'm lazy
 #MODEL="gemini-1.5-pro-latest"
 #MODEL = "gpt-4o"
 MODEL = "gpt-3.5-turbo"
 #Settings.llm = OpenAI(model=MODEL)
 
-Settings.llm = Gemini(
-    model="models/gemini-1.5-pro-latest",
-    temperature=0.1
-)
+# Settings.llm = Gemini(
+#     model="models/gemini-1.5-pro-latest",
+#     temperature=0.1
+# )
+
+Settings.llm = Ollama(model="llama3", request_timeout=30.0)
 
 # some emails have attachments and are enormous and hard to parse
 # so we slice everything down to 128k tokens or less.

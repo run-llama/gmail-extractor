@@ -21,12 +21,12 @@ searcher = GmailSearcher()
 MODEL = "gpt-3.5-turbo"
 #Settings.llm = OpenAI(model=MODEL)
 
-# Settings.llm = Gemini(
-#     model="models/gemini-1.5-pro-latest",
-#     temperature=0.1
-# )
+Settings.llm = Gemini(
+    model="models/gemini-1.5-pro-latest",
+    temperature=0.1
+)
 
-Settings.llm = Ollama(model="llama3", request_timeout=30.0)
+# Settings.llm = Ollama(model="llama3", request_timeout=30.0)
 
 # some emails have attachments and are enormous and hard to parse
 # so we slice everything down to 128k tokens or less.

@@ -26,7 +26,9 @@ In [summarize.py](summarize.py) you can see my first attempt, where I run throug
 
 In [generate.py](generate.py) you can see my second solution: instead of running the LLM on every email, I get it to run through a subset of them. For each email, I give it the body of the email as well as a Python function whose purpose is to detect if an email body is an itinerary (this starts off just being an empty string).
 
-If the LLM thinks the email is an itinerary, it is instructed to modify the Python function so that the email would be detected. It's also instructed to make sure the previous emails would still be detected. So it iterates, making a progressively more complicated Python function every time, that can detect more and more itineraries.
+If the LLM thinks the email is an itinerary, it is instructed to modify the Python function so that the email would be detected. It's also instructed to make sure the previous emails would still be detected. So it iterates, making a progressively more complicated Python function every time, that can detect more and more itineraries. This is the process:
+
+![diagram](diagram.png)
 
 In [sample_generated_code.py](sample_generated_code.py) you can see the output of this process after running through about 100 emails, not all of which were actually itineraries (lots of spam from airlines matches the search). You can see it's slowly iterating towards having a detection block for each individual airline, which is what I imagine I would have come up with as a human anyway, but with a lot more futzing around.
 
